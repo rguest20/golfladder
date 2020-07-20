@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes hover {
+  from {
+  }
+  to{
+    opacity: 0.5;
+  }
+}
+
+html{
+    background-color: #fcfce6
+}
+
+body {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 300;
+  color: #789;
+}
+
+#heroimage{
+    height: 200px;
+    max-width: 100%;
+    margin: auto;
+    background: url("https://i.ibb.co/HDfYMDp/aqualatehero.png") no-repeat center center;
+    background-size: cover;
+}
+
+#introduction{
+    background-color: inherit;
+    padding: 5px 10px 5px 10px; 
+}
+
+#challengepic{
+    height: 200px;
+    max-width: 100%;
+    border-right: 1px solid #000
+    margin: 0;
+    background: url("https://i.ibb.co/hYwjydz/Golfclubs.png") no-repeat center center;
+    background-size: cover;
+}
+
+#challengepic:hover{
+animation-name: hover;
+animation-duration: 3s;
+animation-fill-mode: forwards;
+}
+
+#challengetxt{
+    background-color: rgba(0,0,128,0.7);
+    color: #fff;
+    width: 40%;
+}
+
+#resultspic{
+    height: 200px;
+    max-width: 100%;
+    border-left: 1px solid #000
+    margin: 0;
+    background: url("https://upload.wikimedia.org/wikipedia/commons/e/e6/Goosen_Retief_Scorecard_2006.jpg") no-repeat center center;
+    background-size: cover;    
+}
+
+#resultspic:hover{
+animation-name: hover;
+animation-duration: 3s;
+animation-fill-mode: forwards;
+}
+
+#resultstxt{
+    background-color: rgba(0,0,128,0.7);
+    color: #fff;
+    width: 40%;
+}
+
+#gameface{
+    height: 300px;
+    max-width: 100%
+    margin: 0;
+    background: url("https://media.defense.gov/2007/Apr/26/2000496007/-1/-1/0/070424-F-5350S-006.JPG") no-repeat ;
+    background-size: cover;
+}
+
+@media screen and (min-width: 768px){
+    #challengepic, #resultspic{
+        height:300px;
+    }
+
+    #gameface{
+        height: 600px;
+    }
+}
