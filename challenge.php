@@ -4,7 +4,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   $opponentname = $_POST["opponent"];
 } else {
   $opponentname = "bluebanana";
-  echo "I ran this!";
 }
 $servername = "localhost";
 $username = "root";
@@ -96,32 +95,54 @@ mysqli_close ($conn);
     <section id="challenge-form">
     <h2>Challenge Page</h2>
     <p>Please fill out the form below to initiate challenge</p>
-        <form action="challenge.php" method = "post">
-        <label for = "yourname">Your Name</label>
-        <select name="yourname" id="yourname">
-            <option value="null">Please select an option</option>
-              <?php
-              $output ="";
+        <?php
+          if ($opponentname == "bluebanana"){
+          echo '<form action="challenge.php" method = "post">';
+          echo '<label for = "yourname">Your Name</label>';
+          echo '<select name="yourname" id="yourname">';
+          echo '<option value="null">Please select an option</option>';
+            $output ="";
               foreach($results as $x=>$y){
                 $output=$y['Name'];
                 echo '<option value="' . $output . '">' . $output . '</option>';
-              }
-              ?>
-            </select>
-            <button type="button">Submit Name</button>
-        <br>
-        <small>Challenges can only be made against people who are not in challenges up to 3 positions ahead of you in the ladder</small><br>
-        <label for = "opponent">Who do you challenge?</label>
-          <?php
-          echo "i ran this too";
-           if ($opponentname == "bluebanana"){
-            echo '<select name="opponent" id="opponent" disabled>';
-          } else {
-            echo '<select name="opponent" id="opponent" >';
-          }
+              };
+          echo '</select>';
+          echo'<input type="submit"> <br>';
+          echo '<small>Challenges can only be made against people who are not in challenges up to 3 positions ahead of you in the ladder</small><br>';
+        } else {
+
+        };
+        if ($opponentname == "bluebanana"){
+          echo '<small>Submit your name to continue</small>';
+          echo '<input type="text" id="opponent" name = "opponent" value = "no value" hidden>';
+        } else {
+          echo '<form action="challengeout.php" method = "post">';
+          echo '<input type="text" id="yourname" name = "yourname" value = "' . $name . '" hidden>';
+          echo '<p>Your Name: ' . $name . '</p>';
+          echo '<label for = "opponentname">Who do you challenge?</label>';
+          echo '<select name="opponentname" id="opponentname">';
+          echo '<option value="basic">Pleae select an option</option>';
+          $output ="";
+            foreach($results as $x=>$y){
+              if($y['Name'] === $name){
+                $challengerRank = $y['Position'];
+              };
+            };
+
+            $potentialChallengers = array();
+            foreach($results as $x=>$y){
+              if($y['Position'] == $challengerRank - 1 or $y['Position'] == $challengerRank - 2 or $y['Position'] == $challengerRank - 3){
+                array_push($potentialChallengers, $y['Name']);
+              };
+            };
+            $outputchallenge ="";
+              foreach($potentialChallengers as $x=>$y){
+                $output=$y;
+                echo '<option value="' . $output . '">' . $output . '</option>';
+              };
+            };
+        echo '<input type = "submit" value="Challenge"><br>';
         ?>
-          <option value="null">Pleae select an option</option>
-        <input type = "submit" value="Challenge">
         </form>
         </section>
     <section id="process">
