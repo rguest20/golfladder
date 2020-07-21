@@ -100,7 +100,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
     <p></p>
     <section id="process">
         <h2>State of current challenge: <span id="actdisact">Active</span></h2>
-        <h3>Challenge to be completed by <?php
+        <h3>Challenge to be completed by
+        <?php
         echo ': '. date('d-m-Y', $nextweek) ."\n";
         ?>
         </h3>
