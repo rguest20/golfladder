@@ -11,10 +11,6 @@
   }
 }
 
-html{
-    background-color: #fcfce6
-}
-
 body {
   font-family: 'Mulish', sans-serif;
   font-weight: 300;
@@ -31,7 +27,16 @@ body {
 
 #introduction{
     background-color: inherit;
-    padding: 5px 10px 5px 10px; 
+    padding: 5px 10px 5px 30px;
+}
+
+#rules{
+  color:brown;
+  margin-left: 10px
+}
+
+#indented {
+  padding-left: 20px
 }
 
 #challengepic{
@@ -61,7 +66,7 @@ animation-fill-mode: forwards;
     border-left: 1px solid #000
     margin: 0;
     background: url("https://upload.wikimedia.org/wikipedia/commons/e/e6/Goosen_Retief_Scorecard_2006.jpg") no-repeat center center;
-    background-size: cover;    
+    background-size: cover;
 }
 
 #resultspic:hover{
