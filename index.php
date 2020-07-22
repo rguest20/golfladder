@@ -74,8 +74,8 @@
     <section class="row">
       <div id="heroimage" class="col-12"></div>
     </section>
-    <article class = "d-none d-md-block row" id="introduction">
-      <div class="col-6 indent-3">
+    <article class = "d-none d-md-block row justify-content-center" id="introduction">
+      <div class="col-8 offset-2">
         <h2>Origins of the Ladder</h2>
         <p>During the COVID lockdown of 2020, this ladder was brought in as a way for golfers to be able to continue to play in an organised competition, whilst still maintaining the rules of social distancing set down by the government.</p>
         <br>
@@ -107,11 +107,11 @@
       </div>
     </article>
     <section class="row" id="quickmenu">
-        <a href="challenge.php" class ="col-12 col-md-6" id = "challengepic">
+        <a href="challenge.php" class ="col-12 col-md-4 offset-md-2" id = "challengepic">
             <div id="challengetxt">Make a challenge
             </div>
         </a>
-        <a href="currentchallenge.php" class ="col-12 col-md-6" id = "resultspic">
+        <a href="currentchallenge.php" class ="col-12 col-md-4" id = "resultspic">
             <div id="resultstxt">Return your results
             </div>
         </a>

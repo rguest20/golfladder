@@ -10,6 +10,9 @@ $sql = "SELECT * FROM challenges";
 $challengeData = mysqli_query($conn, $sql);
 $challengeDataArray = $challengeData -> fetch_all(MYSQLI_ASSOC);
 mysqli_close ($conn);
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+  $selector = $_POST["selector"];
+}
 ?>
 
 
@@ -86,23 +89,51 @@ mysqli_close ($conn);
     </nav>
     <section id="gameface">
     </section>
-    <section id="current-challenges">
+    <section id="current-challenges" class = "ml-4">
     <h2>Results/Current Challenges</h2>
-    <p>These are the challenges currently being made. To give a result, please select your challenge.</p>
-    </section>
-    <form id = "results" method = "POST" action = "currentchallenge.php">
-      <?php
-        foreach($challengeDataArray as $x => $y){
-          $challengenum = $x+1;
-          echo 'Challenge ' . $challengenum . ': ' . $y['challenger'] . ' VS. ' . $y['challenged'] . ' to be completed by ' . $y['date_complete'] . '</label><br>';
+    <?php
+      if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        echo '<p>Please complete the results form. Once this has been sent, <strong>it cannot be changed.</strong> </p>';
+        echo '</section>';
+        echo '<form id="results2" method="POST" action = "resultsoutput.php" class = "ml-4">';
+        foreach ($challengeDataArray as $x => $y){
+          if($y['challenger'] == $selector){
+            $challenger = $y['challenger'];
+            $challenged = $y['challenged'];
+          };
+        };
+        echo '<label for="challenger" class="col-sm-2 col-form-label">Challenger</label>';
+        echo '<div class="col-sm-10">';
+        echo '<input type="text" readonly class="form-control-plaintext" id="challenger" value="'. $challenger . '"></div>';
+        echo '<label for="challenged" class="col-sm-2 col-form-label">Challenged</label>';
+        echo '<div class="col-sm-10">';
+        echo '<input type="text" readonly class="form-control-plaintext" id="challenged" value="'. $challenged . '"></div>';
+        echo '<label for = "selector">Who won this game?  </label>';
+        echo '<select id = "selector" name = "selector" class = "ml-2">';
+        echo '<option value = "' . $challenger . '"> ' . $challenger;
+        echo '<option value = "' . $challenged . '"> ' . $challenged;
+        echo '</select></br>';
+        echo '<label for = "moreinfo">Please add any extra information(e.g score, match summary, etc. no more that 600 characters)</label>';
+        echo '<textarea name = "moreinfo" id="textarea" class = "form-control" rows="3" maxlength = "600"></textarea>';
+        echo '<input type = "submit" value = "Submit Result">';
+        echo '</form>';
+      } else {
+        echo '<p>These are the challenges currently being made. To give a result, please select your challenge.</p>';
+        echo '</section>';
+        echo '<form id = "results" method = "POST" action = "currentchallenge.php">';
+          foreach($challengeDataArray as $x => $y){
+            $challengenum = $x+1;
+            echo 'Challenge ' . $challengenum . ': ' . $y['challenger'] . ' VS. ' . $y['challenged'] . ' to be completed by ' . $y['date_complete'] . '</label><br>';
+          }
+          echo '<br><h5> Which result would you like to return?</h5>';
+          echo '<select id = "selector" name = "selector" value = "' . $y['challenger'] . '">';
+            foreach($challengeDataArray as $x => $y){
+              echo '<option value= "' . $y['challenger'] . '">  Challenge: ' . $y['challenger'] . ' VS. ' . $y['challenged'] . '</option>';
+            }
+          echo '<input type="submit" value = "Return Result" id="submitbutton">';
+          echo '</form>';
       }
-      echo '<br><h5> Which result would you like to return?</h5>';
-      echo '<select name = "selector" value = "' . $y['challenger'] . '">';
-        foreach($challengeDataArray as $x => $y){
-            echo '<option value= "' . $y['challenger'] . '">  Challenge: ' . $y['challenger'] . ' VS. ' . $y['challenged'] . '</option>';
-        }
-      echo '<input type="submit" value = "Return Result" id="submitbutton">';
-         ?>
+    ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>

@@ -91,8 +91,14 @@ animation-fill-mode: forwards;
 
 #submitbutton{
   clear: both;
+  display: block;
 }
 
+#selector{
+  clear: both;
+}
+
+}
 #actdisact{
   color: green;
 }
@@ -102,6 +108,6 @@ animation-fill-mode: forwards;
     }
 
     #gameface{
-        height: 600px;
+        height: 450px;
     }
 }
