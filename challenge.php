@@ -13,7 +13,10 @@ $dbname = "golfladder";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 $sql="SELECT * FROM ladder";
+$sql2 = "SELECT * FROM challenges";
 $ladder = mysqli_query($conn, $sql);
+$challengeData = mysqli_query($conn, $sql2);
+$challengeDataArray = $challengeData -> fetch_all(MYSQLI_ASSOC);
 $results = $ladder -> fetch_all(MYSQLI_ASSOC);
 mysqli_close ($conn);
 ?>
@@ -135,13 +138,19 @@ mysqli_close ($conn);
                 array_push($potentialChallengers, $y['Name']);
               };
             };
+            $alreadyInChallenge = array();
+            foreach($challengeDataArray as $x => $y){
+              array_push($alreadyInChallenge, $y['challenger']);
+              array_push($alreadyInChallenge, $y['challenged']);
+            };
+            $canBeChallenged = array_diff($potentialChallengers, $alreadyInChallenge);
             $outputchallenge ="";
-              foreach($potentialChallengers as $x=>$y){
+              foreach($canBeChallenged as $x=>$y){
                 $output=$y;
                 echo '<option value="' . $output . '">' . $output . '</option>';
               };
+              echo '<input type = "submit" value="Challenge"><br>';
             };
-        echo '<input type = "submit" value="Challenge"><br>';
         ?>
         </form>
         </section>
