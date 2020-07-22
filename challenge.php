@@ -156,7 +156,8 @@ mysqli_close ($conn);
         </section>
     <section id="process">
         <h2>State of current challenge: <span id="actdisact">Inactive</span></h2>
-        <h3>Challenge to be completed by <?php
+        <h3>Challenge to be completed by
+        <?php
         $nextweek = time() + 14*24*60*60;
         echo '2 weeks time: '. date('d-m-Y', $nextweek) ."\n";
         ?>
