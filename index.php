@@ -43,7 +43,7 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Current Ladder</a>
+            <a class="nav-link" href="resultsoutput.php">Current Ladder</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="currentchallenge.php">Current Challenges</a>

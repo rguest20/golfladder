@@ -3,16 +3,25 @@ $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "golfladder";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-$sql = "SELECT * FROM challenges";
-$challengeData = mysqli_query($conn, $sql);
-$challengeDataArray = $challengeData -> fetch_all(MYSQLI_ASSOC);
-mysqli_close ($conn);
+$today = date('d-m-Y', time());
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
+  $challenger = $_POST["blarg"];
+  $challenged = $_POST["blargle"];
   $selector = $_POST["selector"];
+  $moreinfo = $_POST["moreinfo"];
+  $random = hrtime (TRUE);
+  $sql2 = "INSERT INTO `results` (`challenger`, `challenged`, `whowon`, `extrainfo`, `date`,  `challengeno`) VALUES ('$challenger', '$challenged' , '$selector' , '$moreinfo','$today', '$random')";
 }
+
+// Create connection and collect data
+$conn = new mysqli($servername, $username, $password, $dbname);
+$sql = "SELECT * FROM `ladder`   ORDER BY `Position` ASC";
+$sql3 = "SELECT * FROM results";
+$sql4 = "DELETE FROM `challenges` WHERE `challenges`.`challenger` = '$challenger'";
+$ladderData = mysqli_query($conn, $sql);
+$ladderDataArray = $ladderData -> fetch_all(MYSQLI_ASSOC);
+$resultsData = mysqli_query($conn, $sql3);
+$resultsDataArray = $resultsData -> fetch_all(MYSQLI_ASSOC);
 ?>
 
 
@@ -89,53 +98,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     </nav>
     <section id="gameface">
     </section>
-    <section id="current-challenges" class = "ml-4">
-    <h2>Results/Current Challenges</h2>
-    <?php
-      if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        echo '<p>Please complete the results form. Once this has been sent, <strong>it cannot be changed.</strong> </p>';
-        echo '</section>';
-        echo '<form id="results2" method="POST" action = "resultsoutput.php" class = "ml-4">';
-        foreach ($challengeDataArray as $x => $y){
-          if($y['challenger'] == $selector){
-            $challenger = $y['challenger'];
-            $challenged = $y['challenged'];
-          };
-        };
-        echo '<div class="col-sm-10">';
-        echo '<input type="text" id="challenger" name = "blarg" value = "' . $challenger . '" hidden>';
-        echo '<input type="text" id="challenger" name = "blargle" value = "' . $challenged . '" hidden>';
-        echo '<label for="challenger" class="col-sm-2 col-form-label">Challenger</label>';
-        echo '<input type="text" readonly class="form-control-plaintext" value="'. $challenger . '"></div>';
-        echo '<div class="col-sm-10">';
-        echo '<label for="challenged" class="col-sm-2 col-form-label">Challenged</label>';
-        echo '<input type="text" readonly class="form-control-plaintext" value="'. $challenged . '"></div>';
-        echo '<label for = "selector">Who won this game?  </label>';
-        echo '<select id = "selector" name = "selector" class = "ml-2">';
-        echo '<option value = "' . $challenger . '"> ' . $challenger;
-        echo '<option value = "' . $challenged . '"> ' . $challenged;
-        echo '</select></br>';
-        echo '<label for = "moreinfo">Please add any extra information(e.g score, match summary, etc. no more that 600 characters)</label>';
-        echo '<textarea name = "moreinfo" id="textarea" class = "form-control" rows="3" maxlength = "600"></textarea>';
-        echo '<input type = "submit" value = "Submit Result">';
-        echo '</form>';
-      } else {
-        echo '<p>These are the challenges currently being made. To give a result, please select your challenge.</p>';
-        echo '</section>';
-        echo '<form id = "results" method = "POST" action = "currentchallenge.php">';
-          foreach($challengeDataArray as $x => $y){
-            $challengenum = $x+1;
-            echo 'Challenge ' . $challengenum . ': ' . $y['challenger'] . ' VS. ' . $y['challenged'] . ' to be completed by ' . $y['date_complete'] . '</label><br>';
-          }
-          echo '<br><h5> Which result would you like to return?</h5>';
-          echo '<select id = "selector" name = "selector" value = "' . $y['challenger'] . '">';
-            foreach($challengeDataArray as $x => $y){
-              echo '<option value= "' . $y['challenger'] . '">  Challenge: ' . $y['challenger'] . ' VS. ' . $y['challenged'] . '</option>';
+    <section id="tables" class = "row">
+      <div id="ladder" class = "col-6">
+        <h3> Ladder </h3>
+        <table style="width:100%">
+          <tr>
+            <th>Posiion</th>
+            <th>Person</th>
+          </tr>
+          <?php
+            foreach($ladderDataArray as $x => $y){
+              echo '<tr>';
+              echo '<td>' . $y['Position'] . '</td>';
+              echo '<td>' . $y['Name'] . '</td>';
+              echo '</tr>';
             }
-          echo '<input type="submit" value = "Return Result" id="submitbutton">';
-          echo '</form>';
-      }
-    ?>
+           ?>
+        </table>
+      </div>
+      <div id="results" class = "col-6">
+        <h3> Recent Results </h3>
+        <table class = "container-fluid">
+          <tr>
+            <th>Challenger</th>
+            <th>Challenged</th>
+            <th>Winner</th>
+            <th>Extra Information</th>
+            <th>Date</th>
+          </tr>
+          <?php
+          foreach($resultsDataArray as $x => $y){
+            echo '<tr>';
+            echo '<td>' . $y['challenger'] . '</td>';
+            echo '<td>' . $y['challenged'] . '</td>';
+            echo '<td>' . $y['whowon'] . '</td>';
+            echo '<td>' . $y['extrainfo'] . '</td>';
+            echo '<td>' . $y['date'] . '</td>';
+            echo '</tr>';
+          }
+           ?>
+         </table>
+      </div>
+    </section>
+    <section id = 'Information'>
+      <form action = "resultsoutput.php">
+        <input type = "submit" value = "Update tables">
+      </form>
+      <?php
+      if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        if ($conn->query($sql2) === TRUE) {
+          echo "Result Inputted <br>";
+        }else{
+          echo "Error" . $sql2 . "<br>" . $conn->error;
+        }
+        if ($conn->query($sql4) === TRUE) {
+          echo "Challenges updated";
+        }else{
+          echo "Error" . $sql4 . "<br>" . $conn->error;
+        }
+      };
+      mysqli_close ($conn);
+      ?>
+    </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
