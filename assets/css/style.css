@@ -93,6 +93,9 @@ animation-fill-mode: forwards;
   clear: both;
 }
 
+#actdisact{
+  color: green;
+}
 @media screen and (min-width: 768px){
     #challengepic, #resultspic{
         height:300px;
