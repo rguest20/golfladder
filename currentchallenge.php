@@ -128,7 +128,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             echo 'Challenge ' . $challengenum . ': ' . $y['challenger'] . ' VS. ' . $y['challenged'] . ' to be completed by ' . $y['date_complete'] . '</label><br>';
           }
           echo '<br><h5> Which result would you like to return?</h5>';
+            if (isset($challengeDataArray[0])){
           echo '<select id = "selector" name = "selector" value = "' . $y['challenger'] . '">';
+        } else {
+          echo '<p>No Current Challenges - Why don\'t you make one?';
+        }
             foreach($challengeDataArray as $x => $y){
               echo '<option value= "' . $y['challenger'] . '">  Challenge: ' . $y['challenger'] . ' VS. ' . $y['challenged'] . '</option>';
             }
