@@ -66,10 +66,10 @@ mysqli_close ($conn);
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Current Ladder</a>
+            <a class="nav-link" href="resultsoutput.php">Current Ladder</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Current Challenges</a>
+            <a class="nav-link" href="currentchallenge.php">Current Challenges</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -85,7 +85,7 @@ mysqli_close ($conn);
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="challenge.php">Make a challenge<span class="sr-only">(current)</span></a>
-              <a class="dropdown-item" href="#">Report Result</a>
+              <a class="dropdown-item" href="currentchallenge.php">Report Result</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Admin only</a>
             </div>

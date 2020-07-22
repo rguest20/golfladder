@@ -68,15 +68,15 @@ $resultsDataArray = $resultsData -> fetch_all(MYSQLI_ASSOC);
               >Home</a
             >
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Current Ladder</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="resultsoutput.php">Current Ladder</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="currentchallenge.php">Current Challenges</a>
           </li>
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle active"
+              class="nav-link dropdown-toggle"
               href="#"
               id="navbarDropdown"
               role="button"
@@ -152,7 +152,7 @@ $resultsDataArray = $resultsData -> fetch_all(MYSQLI_ASSOC);
           echo "Error" . $sql2 . "<br>" . $conn->error;
         }
         if ($conn->query($sql4) === TRUE) {
-          echo "Challenges updated";
+          echo "Challenges updated <br>";
         }else{
           echo "Error" . $sql4 . "<br>" . $conn->error;
         }

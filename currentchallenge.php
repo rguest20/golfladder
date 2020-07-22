@@ -60,14 +60,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Current Ladder</a>
+            <a class="nav-link" href="resultsoutput.php">Current Ladder</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="currentchallenge.php">Current Challenges</a>
           </li>
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle active"
+              class="nav-link dropdown-toggle"
               href="#"
               id="navbarDropdown"
               role="button"
