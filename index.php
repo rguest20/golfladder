@@ -22,7 +22,7 @@
   <body>
     <section = class="row">
     <nav class="navbar navbar-expand-lg navbar-light bg-light col-12">
-      <a class="navbar-brand" href="index.html">Aqualate Golf Ladder 2020</a>
+      <a class="navbar-brand" href="index.php">Aqualate Golf Ladder 2020</a>
       <button
         class="navbar-toggler"
         type="button"

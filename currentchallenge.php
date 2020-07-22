@@ -34,7 +34,7 @@ $conn = new mysqli($servername, $username, $password);
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="index.html">Aqualate Golf Ladder 2020</a>
+      <a class="navbar-brand" href="index.php">Aqualate Golf Ladder 2020</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -50,7 +50,7 @@ $conn = new mysqli($servername, $username, $password);
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html"
+            <a class="nav-link" href="index.php"
               >Home</a
             >
           </li>
@@ -73,7 +73,7 @@ $conn = new mysqli($servername, $username, $password);
               Actions
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="challenge.html">Make a challenge<span class="sr-only">(current)</span></a>
+              <a class="dropdown-item" href="challenge.php">Make a challenge<span class="sr-only">(current)</span></a>
               <a class="dropdown-item" href="#">Report Result</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Admin only</a>
