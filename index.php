@@ -46,7 +46,7 @@
             <a class="nav-link" href="#">Current Ladder</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Current Challenges</a>
+            <a class="nav-link" href="currentchallenge.php">Current Challenges</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -62,7 +62,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="challenge.php">Make a challenge</a>
-              <a class="dropdown-item" href="#">Report Result</a>
+              <a class="dropdown-item" href="currentchallenge.php">Report Result</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Admin only</a>
             </div>
@@ -111,7 +111,7 @@
             <div id="challengetxt">Make a challenge
             </div>
         </a>
-        <a href="#" class ="col-12 col-md-6" id = "resultspic">
+        <a href="currentchallenge.php" class ="col-12 col-md-6" id = "resultspic">
             <div id="resultstxt">Return your results
             </div>
         </a>

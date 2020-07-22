@@ -1,13 +1,15 @@
 <?php
-$name = $_POST["yourname"];
 $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "golfladder";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
-// Check connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+$sql = "SELECT * FROM challenges";
+$challengeData = mysqli_query($conn, $sql);
+$challengeDataArray = $challengeData -> fetch_all(MYSQLI_ASSOC);
+mysqli_close ($conn);
 ?>
 
 
@@ -58,7 +60,7 @@ $conn = new mysqli($servername, $username, $password);
             <a class="nav-link" href="#">Current Ladder</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Current Challenges</a>
+            <a class="nav-link" href="currentchallenge.php">Current Challenges</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -74,7 +76,7 @@ $conn = new mysqli($servername, $username, $password);
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="challenge.php">Make a challenge<span class="sr-only">(current)</span></a>
-              <a class="dropdown-item" href="#">Report Result</a>
+              <a class="dropdown-item" href="currentchallenge.php">Report Result</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Admin only</a>
             </div>
@@ -84,40 +86,23 @@ $conn = new mysqli($servername, $username, $password);
     </nav>
     <section id="gameface">
     </section>
-    <section id="challenge-form">
-    <h2>Challenge Page <br><?php
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }else{
-      echo "!!Connection made!!";
-    }
-    ?>
-    </h2>
-    <p>Please fill out the form below to initiate challenge</p>
-        <form action="challengeout.php" method = "post">
-        <label for = "yourname">Your Name</label>
-        <input type = "text" name = "yourname" value="<?php echo  $name ?>" placeholder="<?php echo $name ?>">
-        <label for = "opponentname">Who are you challenging</label>
-        <select name="opponentname" id="opponentname" autofocus>
-                <option value="null">Please select an option</option>
-                <option value="Tim">Tim</option>
-                <option value="Geoff">Geoff</option>
-                <option value="Roger">Roger</option>
-                <option value="Harry">Harry</option>
-        </select>
-        <br>
-        <small>The people shown here are the ones you can challenge</small>
-        <input type = "submit" value="Challenge!">
-        </form>
-        </section>
-    <section id="process">
-        <h2>State of current challenge: <span id="actdisact">Inactive</span></h2>
-        <h3>Challenge to be completed by <?php
-        $nextweek = time() + 14*24*60*60;
-        echo '2 weeks time: '. date('d-m-Y', $nextweek) ."\n";
-        ?>
-        </h3>
+    <section id="current-challenges">
+    <h2>Results/Current Challenges</h2>
+    <p>These are the challenges currently being made. To give a result, please select your challenge.</p>
     </section>
+    <form id = "results" method = "POST" action = "currentchallenge.php">
+      <?php
+        foreach($challengeDataArray as $x => $y){
+          $challengenum = $x+1;
+          echo 'Challenge ' . $challengenum . ': ' . $y['challenger'] . ' VS. ' . $y['challenged'] . ' to be completed by ' . $y['date_complete'] . '</label><br>';
+      }
+      echo '<br><h5> Which result would you like to return?</h5>';
+      echo '<select name = "selector" value = "' . $y['challenger'] . '">';
+        foreach($challengeDataArray as $x => $y){
+            echo '<option value= "' . $y['challenger'] . '">  Challenge: ' . $y['challenger'] . ' VS. ' . $y['challenged'] . '</option>';
+        }
+      echo '<input type="submit" value = "Return Result" id="submitbutton">';
+         ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
