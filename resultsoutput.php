@@ -11,13 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   $moreinfo = $_POST["moreinfo"];
   $random = hrtime (TRUE);
   $sql2 = "INSERT INTO `results` (`challenger`, `challenged`, `whowon`, `extrainfo`, `date`,  `challengeno`) VALUES ('$challenger', '$challenged' , '$selector' , '$moreinfo','$today', '$random')";
+  $sql4 = "DELETE FROM `challenges` WHERE `challenges`.`challenger` = '$challenger'";
 }
 
 // Create connection and collect data
 $conn = new mysqli($servername, $username, $password, $dbname);
 $sql = "SELECT * FROM `ladder`   ORDER BY `Position` ASC";
 $sql3 = "SELECT * FROM results";
-$sql4 = "DELETE FROM `challenges` WHERE `challenges`.`challenger` = '$challenger'";
 $ladderData = mysqli_query($conn, $sql);
 $ladderDataArray = $ladderData -> fetch_all(MYSQLI_ASSOC);
 $resultsData = mysqli_query($conn, $sql3);
@@ -155,6 +155,34 @@ $resultsDataArray = $resultsData -> fetch_all(MYSQLI_ASSOC);
           echo "Challenges updated";
         }else{
           echo "Error" . $sql4 . "<br>" . $conn->error;
+        }
+        if ($selector==$challenger){
+            foreach($ladderDataArray as $x => $y){
+              if ($y['Name'] == $challenged){
+                $swapposition1 = $y['Position'];
+              }
+              if ($y['Name'] == $challenger){
+                $swapposition2 = $y['Position'];
+            }
+          }
+            $sql5 = "UPDATE `ladder` SET `Position` = '100' WHERE `ladder`.`Position` = '$swapposition1'";
+            $sql6 = "UPDATE `ladder` SET `Position` = '$swapposition1' WHERE `ladder`.`Position` = '$swapposition2'";
+            $sql7 = "UPDATE `ladder` SET `Position` = '$swapposition2' WHERE `ladder`.`Position` = '100'";
+          if ($conn->query($sql5) === TRUE) {
+            echo "Position swap 1/3<br>";
+          }else{
+            echo "Error" . $sql5 . "<br>" . $conn->error;
+          }
+          if ($conn->query($sql6) === TRUE) {
+            echo "Position swap 2/3<br>";
+          }else{
+            echo "Error" . $sql6 . "<br>" . $conn->error;
+          }
+          if ($conn->query($sql7) === TRUE) {
+            echo "Position swap 3/3<br>";
+          }else{
+            echo "Error" . $sql7 . "<br>" . $conn->error;
+          }
         }
       };
       mysqli_close ($conn);
