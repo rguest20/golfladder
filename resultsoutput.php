@@ -99,9 +99,9 @@ $resultsDataArray = $resultsData -> fetch_all(MYSQLI_ASSOC);
     <section id="gameface">
     </section>
     <section id="tables" class = "row">
-      <div id="ladder" class = "col-6">
+      <div id="ladder" class = "col-12 col-md-2 offset-md-1 justify-center">
         <h3> Ladder </h3>
-        <table style="width:100%">
+        <table>
           <tr>
             <th>Posiion</th>
             <th>Person</th>
@@ -116,7 +116,7 @@ $resultsDataArray = $resultsData -> fetch_all(MYSQLI_ASSOC);
            ?>
         </table>
       </div>
-      <div id="results" class = "col-6">
+      <div id="results" class = "col-md-8 offset-md-1">
         <h3> Recent Results </h3>
         <table class = "container-fluid">
           <tr>

@@ -94,6 +94,10 @@ animation-fill-mode: forwards;
   display: block;
 }
 
+table, th, td {
+  border: 1px solid black;
+}
+
 #selector{
   clear: both;
 }

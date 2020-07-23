@@ -69,6 +69,43 @@
           </li>
         </ul>
       </div>
+      <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary d-none d-md-inline" data-toggle="modal" data-target="#exampleModalCenter">
+      Contact Your Fellow Golfers
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Contact Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p pre>Stuart Alderson		07785 733257</p>
+            <p pre>Steve Courtney		07768 964689	01785 850139</p>
+            <p pre>Digby Gould		<s>07841 019454</s>	01785 224848</p>
+            <p pre>Roger Guest		07503 225708	01743 367185</p>
+            <p pre>John Hall			07447 027708</p>
+            <p pre>David Hoare		07779 903843</p>
+            <p pre>Kevin Hicken		07702 376180	01902 745808</p>
+            <p pre>Martin Jacks		07500 830621	01785 227688</p>
+            <p pre>Chris Jones		07905 861467	01952 822879</p>
+            <p pre>John Lysko		07974 938074</p>
+            <p pre>Barry McKinnon		07857 427197	01952 605973</p>
+            <p pre>Bill McKinnon		07751 752370</p>
+            <p pre>Brian Plant		07376 253110	01952 814552</p>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     </nav>
   </section>
     <section class="row">

@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
       } else {
         echo '<p>These are the challenges currently being made. To give a result, please select your challenge.</p>';
         echo '</section>';
-        echo '<form id = "results" method = "POST" action = "currentchallenge.php">';
+        echo '<form id = "results" method = "POST" action = "currentchallenge.php" class = "ml-4">';
           foreach($challengeDataArray as $x => $y){
             $challengenum = $x+1;
             echo 'Challenge ' . $challengenum . ': ' . $y['challenger'] . ' VS. ' . $y['challenged'] . ' to be completed by ' . $y['date_complete'] . '</label><br>';
@@ -136,7 +136,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
             foreach($challengeDataArray as $x => $y){
               echo '<option value= "' . $y['challenger'] . '">  Challenge: ' . $y['challenger'] . ' VS. ' . $y['challenged'] . '</option>';
             }
+            if (isset($challengeDataArray[0])){
           echo '<input type="submit" value = "Return Result" id="submitbutton">';
+        }
           echo '</form>';
       }
     ?>
